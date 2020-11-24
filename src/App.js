@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import { Switch, Redirect, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -14,8 +15,9 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 class App extends Component {
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUser } = this.props; // this.props from react-redux
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      // firebase return userAuth as either user object or null
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot((snapShot) => {
@@ -25,7 +27,7 @@ class App extends Component {
           });
         });
       } else {
-        setCurrentUser(userAuth); // if user log out userAuth = null
+        setCurrentUser(userAuth); // set userAuth to null when logged out
       }
     });
   }
