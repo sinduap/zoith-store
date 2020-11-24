@@ -15,7 +15,7 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 class App extends Component {
   componentDidMount() {
-    const { setCurrentUser } = this.props; // this.props from react-redux
+    const { setCurrentUser } = this.props; // this.props from connect react-redux
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       // firebase return userAuth as either user object or null
       if (userAuth) {
